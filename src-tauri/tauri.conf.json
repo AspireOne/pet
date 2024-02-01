@@ -35,10 +35,13 @@
     "windows": [
       {
         "fullscreen": false,
-        "resizable": true,
-        "title": "tauri-black",
-        "width": 800,
-        "height": 600
+        "resizable": false,
+        "title": "Pet",
+        "width": 200,
+        "height": 400,
+        "decorations": false,
+        "transparent": true,
+        "alwaysOnTop": true
       }
     ]
   }

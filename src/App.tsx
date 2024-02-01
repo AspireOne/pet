@@ -1,55 +1,28 @@
-import { invoke } from "@tauri-apps/api/tauri";
-import { useState } from "react";
-import reactLogo from "./assets/react.svg";
+import { useEffect, useState } from "react";
+import { TextBubble } from "./TextBubble.tsx";
+import Alpha from "./assets/alpha.webp";
 import "./index.css";
-
 function App() {
-	const [greetMsg, setGreetMsg] = useState("");
-	const [name, setName] = useState("");
+  const [name, setName] = useState("Alpha");
+  const [showText, setShowText] = useState(false);
+  const [menu, showMenu] = useState(false);
 
-	async function greet() {
-		// Learn more about Tauri commands at https://tauri.app/v1/guides/features/command
-		setGreetMsg(await invoke("greet", { name }));
-	}
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setShowText(true);
+    }, 20000);
+    return () => clearInterval(interval);
+  }, []);
 
-	return (
-		<div className="container">
-			<h1 className={"text-red-400 rounded-lg"}>
-				Wedlcome to your mothers anus! This should be green
-			</h1>
-
-			<div className="row">
-				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-					<img src="/vite.svg" className="logo vite" alt="Vite logo" />
-				</a>
-				<a href="https://tauri.app" target="_blank" rel="noreferrer">
-					<img src="/tauri.svg" className="logo tauri" alt="Tauri logo" />
-				</a>
-				<a href="https://reactjs.org" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-
-			<p>Click on the Tauri, Vite, and React logos to learn more.</p>
-
-			<form
-				className="row"
-				onSubmit={(e) => {
-					e.preventDefault();
-					greet();
-				}}
-			>
-				<input
-					id="greet-input"
-					onChange={(e) => setName(e.currentTarget.value)}
-					placeholder="Enter a name..."
-				/>
-				<button type="submit">Greet</button>
-			</form>
-
-			<p>{greetMsg}</p>
-		</div>
-	);
+  return (
+    <div
+      className="container relative flex flex-col bg-transparent border-red-400 border-2 select-none"
+      onKeyDown={() => showMenu(!menu)}
+    >
+      <img src={Alpha} className={""} alt="<3" draggable={false} />
+      {showText && <TextBubble text={"Hi..."} setVisibility={setShowText} />}
+    </div>
+  );
 }
 
 export default App;
