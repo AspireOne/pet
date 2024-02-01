@@ -9,12 +9,16 @@
     "productName": "tauri-black",
     "version": "0.0.0"
   },
+
   "tauri": {
     "allowlist": {
       "all": false,
       "shell": {
         "all": false,
         "open": true
+      },
+      "window": {
+        "startDragging": true
       }
     },
     "bundle": {
