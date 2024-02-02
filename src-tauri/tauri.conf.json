@@ -11,6 +11,10 @@
   },
 
   "tauri": {
+    "systemTray": {
+      "iconPath": "icons/icon.png",
+      "menuOnLeftClick": true
+    },
     "allowlist": {
       "all": false,
       "shell": {
@@ -41,8 +45,10 @@
         "fullscreen": false,
         "resizable": false,
         "title": "Pet",
-        "width": 200,
-        "height": 400,
+        "skipTaskbar": true,
+        "focus": false,
+        "width": 170,
+        "height": 300,
         "decorations": false,
         "transparent": true,
         "alwaysOnTop": true

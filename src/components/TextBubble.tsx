@@ -7,13 +7,19 @@ export const TextBubble = ({
     setVisibility(false);
   }, text.length * 700);
 
+  const textClick = () => {
+    activateText();
+  };
+
   return (
     <div
-      className={`transition-opacity duration-500 absolute w-full bottom-5 text-center ${
-        visibility ? "opacity-100" : "opacity-0"
-      }`}
+      style={{ transition: "opacity 4s", opacity: visibility ? 1 : 0 }}
+      className={"absolute w-full bottom-5 text-center"}
     >
-      <div className={"backdrop-blur rounded-md mx-auto bg-gray-600/20 w-[80%]"}>
+      <div
+        className={"backdrop-blur rounded-md mx-auto bg-gray-600/20 w-[80%]"}
+        onMouseDown={textClick}
+      >
         <h2>{text}</h2>
       </div>
     </div>

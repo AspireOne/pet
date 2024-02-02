@@ -1,13 +1,12 @@
 import { appWindow } from "@tauri-apps/api/window";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Alpha from "./assets/alpha.webp";
-import { Menu } from "./components/Menu.tsx";
 import { TextBubble } from "./components/TextBubble.tsx";
 import "./index.css";
 function App() {
   const [name, setName] = useState("Alpha");
   const [showText, setShowText] = useState(false);
-  const [menu, showMenu] = useState(false);
+  const [text, setText] = useState(`Hi... I am ${name}`);
 
   const startDrag = () => {
     const mouseMoveHandler = (e: any) => {
@@ -33,25 +32,22 @@ function App() {
     );
   };
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setShowText(true);
-    }, 20000);
-    return () => clearInterval(interval);
-  }, []);
+  const Home = () => {
+    return (
+      // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation>
+      <div
+        className="container relative flex flex-col bg-transparent w-full h-full select-none"
+        onClick={() => setShowText(true)}
+        onMouseDown={startDrag}
+      >
+        <img src={Alpha} className={""} alt="<3" draggable={false} />
+        {/*Needs to be randomized*/}
+        <TextBubble text={text} visibility={showText} setVisibility={setShowText} />
+      </div>
+    );
+  };
 
-  return (
-    // biome-ignore lint/a11y/useKeyWithClickEvents: <explanation> -- GET FUCKED
-    <div
-      className="container relative flex flex-col bg-transparent border-red-400 border-2 select-none"
-      onClick={() => showMenu(!menu)}
-      onMouseDown={startDrag}
-    >
-      <img src={Alpha} className={""} alt="<3" draggable={false} />
-      <TextBubble text={`Hi... I am ${name}`} visibility={showText} setVisibility={setShowText} />
-      {menu && <Menu />}
-    </div>
-  );
+  return <Home />;
 }
 
 export default App;
